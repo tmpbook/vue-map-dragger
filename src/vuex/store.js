@@ -11,9 +11,20 @@ const SANTA_MONICA = {
   top: -3013,
 }
 
+let coordinates;
+
+try {
+  const hashWithoutHash = window.location.hash.slice(1); // #foo => foo
+  const coodString = window.decodeURIComponent(hashWithoutHash) // { "foo": "bar" }
+  coordinates = JSON.parse(coodString)
+} catch (error) {
+  console.log("Error deserializing coordinates: " + error)
+  coordinates = SANTA_MONICA
+}
+
 const state = {
   mapName: "Los Angeles",
-  coordinates: SANTA_MONICA,
+  coordinates: coordinates,
   mapLoaded: false,
 }
 
